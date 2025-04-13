@@ -9,7 +9,10 @@ This plugin detects and automatically activates a venv environment when you cd i
 ```git clone https://github.com/sleao/zsh-autovenv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom/}/plugins/zsh-autovenv```
 
 2. Add the plugin to your oh-my-zsh file:
-```plugins=(
+```
+plugins=(
     zsh-autovenv
-)```
+)
+```
+
 3. Start a new terminal session.
