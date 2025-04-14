@@ -1,20 +1,27 @@
 _toggleVenvShell() {
-  local in_venv_dir=0
+  local venv_path=""
 
-  if [[ -d "$PWD/.venv" ]]; then
-    in_venv_dir=1
+  local dir="$PWD"
+  # this might break something if you have a .venv in your ~
+  while [[ "$dir" != "/" ]]; do
+    if [[ -d "$dir/.venv" ]]; then
+      venv_path="$dir/.venv"
+      break 
+    fi
+    dir="${dir:h}"
+  done
+
+  if [[ $venv_active -eq 1 ]]; then
+    if [[ -z "$venv_path" ]] || [[ "$PWD" != "${venv_path:h}"* ]]; then
+      export venv_active=0
+      unset venv_path
+      (( $+functions[deactivate] )) && deactivate
+    fi
   fi
 
-  if [[ $venv_active -eq 1 ]] && { [[ $in_venv_dir -eq 0 ]] || [[ "$PWD" != "$venv_dir"* ]]; }; then
-    export venv_active=0
-    unset venv_dir
-    (( $+functions[deactivate] )) && deactivate
-  fi
-
-  if [[ $in_venv_dir -eq 1 ]] && [[ $venv_active -ne 1 ]]; then
+  if [[ -n "$venv_path" ]] && [[ $venv_active -ne 1 ]]; then
     export venv_active=1
-    export venv_dir="$PWD/.venv"
-    source "${venv_dir}/bin/activate"
+    source "${venv_path}/bin/activate"
   fi
 }
 
