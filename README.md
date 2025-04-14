@@ -6,7 +6,9 @@ This plugin detects and automatically activates a venv environment when you cd i
 ## Installation
 
 1. Clone this repository into `$ZSH_CUSTOM/plugins` (default `~/.oh-my-zsh/custom/plugins/`):
-```git clone https://github.com/sleao/zsh-autovenv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom/}/plugins/zsh-autovenv```
+```
+git clone https://github.com/sleao/zsh-autovenv ${ZSH_CUSTOM:-~/.oh-my-zsh/custom/}/plugins/zsh-autovenv
+```
 
 2. Add the plugin to your oh-my-zsh file:
 ```
